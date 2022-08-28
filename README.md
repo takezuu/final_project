@@ -1,10 +1,10 @@
 # Поект: "Автоматизация тестов интернет магазина Open cart"
 
 Использованные библиотеки:
-Allure
-Pytest
-Requests
-Selenium
+Allure,
+Pytest,
+Requests,
+Selenium,
 Pytest-xdist
 
 Структура проекта:
