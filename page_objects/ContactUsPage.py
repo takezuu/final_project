@@ -9,17 +9,17 @@ import config
 
 class ContactUsPage(BasePage):
     ICON = (By.CSS_SELECTOR, ".fa.fa-phone")
-    YOUR_NAME = "#input-name"
-    E_MAIL = "#input-email"
-    ENQUIRY = "#input-enquiry"
-    SUBMIT = "[value='Submit']"
-    MESSAGE = "#content > p"
-    MESSAGE_NAME = "fieldset > div > div > div"
-    CONTINUE = '#content > div > div > a'
-    ADDRESS = '.panel-body > div > div > address'
-    FRST_FIELD = 'fieldset > div:nth-child(2)'
-    SECOND_FIELD = 'fieldset > div:nth-child(3)'
-    THIRD_FIELD = 'fieldset > div:nth-child(4)'
+    YOUR_NAME = (By.CSS_SELECTOR, "#input-name")
+    E_MAIL = (By.CSS_SELECTOR, "#input-email")
+    ENQUIRY = (By.CSS_SELECTOR, "#input-enquiry")
+    SUBMIT = (By.CSS_SELECTOR, "[value='Submit']")
+    MESSAGE = (By.CSS_SELECTOR, "#content > p")
+    MESSAGE_NAME = (By.CSS_SELECTOR, "fieldset > div > div > div")
+    CONTINUE = (By.CSS_SELECTOR, '#content > div > div > a')
+    ADDRESS = (By.CSS_SELECTOR, '.panel-body > div > div > address')
+    FRST_FIELD = (By.CSS_SELECTOR, 'fieldset > div:nth-child(2)')
+    SECOND_FIELD = (By.CSS_SELECTOR, 'fieldset > div:nth-child(3)')
+    THIRD_FIELD = (By.CSS_SELECTOR, 'fieldset > div:nth-child(4)')
 
     @allure.step('Open contact us page')
     def open_contacts_us(self, icon):
@@ -34,9 +34,9 @@ class ContactUsPage(BasePage):
     @allure.step('Fill contact us form')
     def fill_form(self, name, email, enquiry):
         try:
-            self.browser.find_element(By.CSS_SELECTOR, name).send_keys(config.NAME)
-            self.browser.find_element(By.CSS_SELECTOR, email).send_keys(config.EMAIL)
-            self.browser.find_element(By.CSS_SELECTOR, enquiry).send_keys(config.ENQUIRY)
+            self.browser.find_element(*name).send_keys(config.NAME)
+            self.browser.find_element(*email).send_keys(config.EMAIL)
+            self.browser.find_element(*enquiry).send_keys(config.ENQUIRY)
         except NoSuchElementException:
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
@@ -46,7 +46,7 @@ class ContactUsPage(BasePage):
     @allure.step('Press submit button')
     def press_submit_button(self, submit):
         try:
-            self.browser.find_element(By.CSS_SELECTOR, submit).click()
+            self.browser.find_element(*submit).click()
         except NoSuchElementException:
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
@@ -55,12 +55,12 @@ class ContactUsPage(BasePage):
 
     @allure.step('Get message')
     def get_message(self, message):
-        return self.browser.find_element(By.CSS_SELECTOR, message).text
+        return self.browser.find_element(*message).text
 
     @allure.step('Press continue button')
     def press_continue_button(self, continuebtn):
         try:
-            self.browser.find_element(By.CSS_SELECTOR, continuebtn).click()
+            self.browser.find_element(*continuebtn).click()
         except NoSuchElementException:
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
@@ -70,7 +70,7 @@ class ContactUsPage(BasePage):
     @allure.step('Get attribute')
     def get_attribute(self, required):
         try:
-            return self.browser.find_element(By.CSS_SELECTOR, required).get_attribute('class')
+            return self.browser.find_element(*required).get_attribute('class')
         except NoSuchElementException:
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
@@ -80,7 +80,7 @@ class ContactUsPage(BasePage):
     @allure.step('Get address')
     def get_address(self, address):
         try:
-            return self.browser.find_element(By.CSS_SELECTOR, address).text
+            return self.browser.find_element(*address).text
         except NoSuchElementException:
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
