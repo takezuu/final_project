@@ -8,15 +8,11 @@ import allure
 
 class AdminPage(BasePage):
     PATH = 'admin'
-    CLICKABLE_ELEMENT = LOGIN_BUTTON = (By.CSS_SELECTOR, "[type='submit']")
-    VISIBILITY_ELEMENTS = (By.CSS_SELECTOR, ".panel.panel-default")
-    PRESENCE_ELEMENT = (By.CSS_SELECTOR, "#footer a")
-    VISIBILITY_ELEMENT = LOGIN_FIELD = (By.CSS_SELECTOR, "#input-username")
-    ELEMENT_ATTRIBUTE = PASSWORD_FIELD = ((By.CSS_SELECTOR, "#input-password"), 'type')
-    product_name = 'Asus laptop'
-    product_name_2 = 'Acer smart watch'
-    meta_teg = 'Asus'
-    product_model = 'X65C'
+    LOGIN_BUTTON = (By.CSS_SELECTOR, "[type='submit']")
+    LOGIN_PANEL = (By.CSS_SELECTOR, ".panel.panel-default")
+    FOOTER_LINK = (By.CSS_SELECTOR, "#footer a")
+    LOGIN_FIELD = LOGIN_FIELD = (By.CSS_SELECTOR, "#input-username")
+    PASSWORD_FIELD = ((By.CSS_SELECTOR, "#input-password"), 'type')
 
     @allure.step('Log in')
     def log_in(self, login, password):
@@ -28,6 +24,7 @@ class AdminPage(BasePage):
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
                               name='log_in')
+            raise AssertionError("Авторизация не удалась")
 
     @allure.step('Add new product')
     def add_new_product(self, product_name, meta_teg, product_model):
@@ -46,6 +43,7 @@ class AdminPage(BasePage):
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
                               name='add_new_product')
+            raise AssertionError("Новый продукт не добавлен")
 
     @allure.step('Check new product')
     def check_new_product(self, product_name):
@@ -57,6 +55,7 @@ class AdminPage(BasePage):
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
                               name='check_new_product')
+                raise AssertionError("Новый продукт не добавлен")
 
     @allure.step('Delete product')
     def delete_product(self):
@@ -69,3 +68,4 @@ class AdminPage(BasePage):
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
                               name='delete_product')
+                raise AssertionError("Продукт не удален")

@@ -5,20 +5,20 @@ import allure
 
 
 class LoginPage(BasePage):
-    MY_ACCOUNT = '.list-inline > .dropdown'
-    LOGIN = '.list-inline > .dropdown > ul > li:nth-child(2)'
-    LOGIN_BUTTON = "[value='Login']"
-    WARNING = '#account-login > div'
-    EMAIL = '#input-email'
-    PASSWORD = '#input-password'
-    FORGOTTEN = '#content > div > div:nth-child(2) > div > form > div:nth-child(2) > a'
-    NEW_CUSTOMER_TEXT = '#content > div  > div > div'
+    MY_ACCOUNT = (By.CSS_SELECTOR, '.list-inline > .dropdown')
+    LOGIN = (By.CSS_SELECTOR, '.list-inline > .dropdown > ul > li:nth-child(2)')
+    LOGIN_BUTTON = (By.CSS_SELECTOR, "[value='Login']")
+    WARNING = (By.CSS_SELECTOR, '#account-login > div')
+    EMAIL = (By.CSS_SELECTOR, '#input-email')
+    PASSWORD = (By.CSS_SELECTOR, '#input-password')
+    FORGOTTEN = (By.CSS_SELECTOR, '#content > div > div:nth-child(2) > div > form > div:nth-child(2) > a')
+    NEW_CUSTOMER_TEXT = (By.CSS_SELECTOR, '#content > div  > div > div')
 
     @allure.step('Open login page')
     def open_login_page(self, my_account, login):
         try:
-            self.browser.find_element(By.CSS_SELECTOR, my_account).click()
-            self.browser.find_element(By.CSS_SELECTOR, login).click()
+            self.browser.find_element(*my_account).click()
+            self.browser.find_element(*login).click()
         except NoSuchElementException:
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
@@ -28,7 +28,7 @@ class LoginPage(BasePage):
     @allure.step('Click button')
     def click_button(self, button):
         try:
-            self.browser.find_element(By.CSS_SELECTOR, button).click()
+            self.browser.find_element(*button).click()
         except NoSuchElementException:
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
@@ -38,7 +38,7 @@ class LoginPage(BasePage):
     @allure.step('Get text')
     def get_text(self, warning):
         try:
-            return self.browser.find_element(By.CSS_SELECTOR, warning).text
+            return self.browser.find_element(*warning).text
         except NoSuchElementException:
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
@@ -48,8 +48,8 @@ class LoginPage(BasePage):
     @allure.step('Fill login form')
     def fill_login_form(self, email_selector, password_selector, email, password):
         try:
-            self.browser.find_element(By.CSS_SELECTOR, email_selector).send_keys(email)
-            self.browser.find_element(By.CSS_SELECTOR, password_selector).send_keys(password)
+            self.browser.find_element(*email_selector).send_keys(email)
+            self.browser.find_element(*password_selector).send_keys(password)
         except NoSuchElementException:
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),

@@ -7,11 +7,11 @@ import allure
 
 class UserRegistrationPage(BasePage):
     PATH = 'index.php?route=account/register'
-    CLICKABLE_ELEMENT = (By.CSS_SELECTOR, "[value='Continue']")
-    VISIBILITY_ELEMENTS = (By.CSS_SELECTOR, "#account")
-    PRESENCE_ELEMENT = (By.CSS_SELECTOR, "#content p a")
-    VISIBILITY_ELEMENT = (By.CSS_SELECTOR, "[name='agree']")
-    ELEMENT_ATTRIBUTE = ((By.CSS_SELECTOR, "#column-right"), 'class')
+    CONTINUE_BUTTON = (By.CSS_SELECTOR, "[value='Continue']")
+    ACCOUNT_SECTION = (By.CSS_SELECTOR, "#account")
+    LOGIN_PAGE_LINK = (By.CSS_SELECTOR, "#content p a")
+    AGREE_CHECK_BOX = (By.CSS_SELECTOR, "[name='agree']")
+    RIGHT_COLUMN = ((By.CSS_SELECTOR, "#column-right"), 'class')
     reg_selectors = ["#input-firstname", "#input-lastname", "#input-email", "#input-telephone", "#input-password"]
     data = dict(zip(reg_selectors, config.reg_data))
 
@@ -30,3 +30,4 @@ class UserRegistrationPage(BasePage):
             with allure.step('Screenshot'):
                 allure.attach(body=self.browser.get_screenshot_as_png(),
                               name='fill_form')
+                raise AssertionError("Пользователь не зарегистрирован")
