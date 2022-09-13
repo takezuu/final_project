@@ -39,9 +39,3 @@ def browser(request):
 @pytest.fixture
 def base_url(request):
     return request.config.getoption("--base_url")
-
-
-@pytest.fixture
-def url(request):
-    url = request.config.getoption("--base_url")
-    return url
